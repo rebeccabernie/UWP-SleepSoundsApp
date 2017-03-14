@@ -7,7 +7,49 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <!-- Code for adding custom fonts adapted from 
+         http://www.c-sharpcorner.com/article/custom-fonts-in-windows-10-uwp-app/-->
 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="Black">
+            <!-- Quicksand_Light is in Quicksand font family -->
+            <TextBlock x:Name="title" Text="sleep  sounds"
+                   FontFamily="Assets/Quicksand_Light.otf#Quicksand" Foreground="White" FontSize="15"
+                   FontStyle="Italic" Margin="0,5,0,0"
+                   HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Background="Black" Margin="0,40,0,0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <!-- Starts at row 0 which will be Title-->
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" x:Name="rainButton" Content="Rain" Foreground="White" 
+                    FontFamily="Assets/Pacifico.ttf#Pacifico" FontSize="25" FontWeight="SemiLight"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
+                
+                <!-- Image as background code adapted from 
+                http://stackoverflow.com/questions/15892290/how-to-change-set-background-image-of-a-button-in-c-sharp-wpf-code -->
+                <Button.Background>
+                    <ImageBrush ImageSource ="Assets/rain.jpg"></ImageBrush>
+                </Button.Background>
+                
+            </Button>
+
+
+        </Grid>
     </Grid>
 </Page>
