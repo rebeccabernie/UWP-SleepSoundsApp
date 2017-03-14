@@ -26,5 +26,10 @@ namespace SleepSounds
         {
             this.InitializeComponent();
         }
+
+        private void rainButton_Click(object sender, RoutedEventArgs e)
+        {
+            medrain.Play();
+        }
     }
 }
