@@ -34,10 +34,10 @@
     <!-- Buttons -->
             <!-- Quicksand_Light is in Quicksand font family -->
 
-            <Button Grid.Row="0" x:Name="rainButton" Content="Rain" Foreground="White" 
-                    FontFamily="Assets/Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
+            <Button Grid.Row="0" x:Name="rainButton" Content="Rain" Foreground="White"
+                    FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="rainButton_Click">
-                
+
                 <!-- Image as background code adapted from 
                 http://stackoverflow.com/questions/15892290/how-to-change-set-background-image-of-a-button-in-c-sharp-wpf-code -->
                 <Button.Background>
@@ -47,7 +47,7 @@
             </Button>
 
             <Button Grid.Row="1" x:Name="wavButton" Content="Waves" Foreground="White" 
-                    FontFamily="Assets/Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
+                    FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
 
                 <!-- Image as background code adapted from 
