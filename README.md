@@ -5,7 +5,12 @@ This is a project for 3rd Year Software Development module Mobile Apps Developme
 
 - Play sound when user clicks on button  
 - Allow user to stop sound (Stop button or stop when user clicks button a second time)  
-- Repeat sound file until user clicks stop
+- Repeat sound file until user clicks stop  
+
+- Allow user to save configurations: play multiple sounds at once
+- Play sounds in background  
+
+- User saved sounds in drop down?
 
 
 ### Resources  
