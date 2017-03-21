@@ -27,9 +27,83 @@ namespace SleepSounds
             this.InitializeComponent();
         }
 
+        // Count Variables
+        public int rainC = 0;
+        public int waveC = 0;
+        public int thunC = 0;
+        public int wNoiseC = 0;
+        public int fireC = 0;
+
+
         private void rainButton_Click(object sender, RoutedEventArgs e)
         {
-            medrain.Play();
+            if (rainC == 0)
+            {
+                medrain.Play();
+                rainC++;
+            }
+            else
+            {
+                medrain.Stop();
+                rainC--;
+            }
+        }
+
+        private void wavButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (waveC == 0)
+            {
+                
+               // waves.PlayLooping();
+                waveC++;
+            }
+            else
+            {
+                waves.Stop();
+                waveC--;
+            }
+        }
+
+        private void thuButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (thunC == 0)
+            {
+                thunder.Play();
+                thunC++;
+            }
+            else
+            {
+                thunder.Stop();
+                thunC--;
+            }
+        }
+
+        private void whnoiButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (wNoiseC == 0)
+            {
+                whitenoise.Play();
+                wNoiseC++;
+            }
+            else
+            {
+                whitenoise.Stop();
+                wNoiseC--;
+            }
+        }
+
+        private void fireButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (fireC == 0)
+            {
+                fire.Play();
+                fireC++;
+            }
+            else
+            {
+                fire.Stop();
+                fireC--;
+            }
         }
     }
 }

@@ -47,25 +47,25 @@
 
             <Button Grid.Row="1" x:Name="wavButton" Content="Waves" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="wavButton_Click">
 
                 <Button.Background>
-                    <ImageBrush ImageSource ="Assets/BtnImgs/waves2.jpg"></ImageBrush>
+                    <ImageBrush ImageSource ="Assets/BtnImgs/waves.jpg"></ImageBrush>
                 </Button.Background>
             </Button>
 
             <Button Grid.Row="2" x:Name="thuButton" Content="Thunderstorm" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="thuButton_Click">
 
                 <Button.Background>
-                    <ImageBrush ImageSource ="Assets/BtnImgs/thunder1.jpg"></ImageBrush>
+                    <ImageBrush ImageSource ="Assets/BtnImgs/thunder.jpg"></ImageBrush>
                 </Button.Background>
             </Button>
 
             <Button Grid.Row="3" x:Name="whnoiButton" Content="White Noise" Foreground="Black" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="whnoiButton_Click">
 
                 <Button.Background>
                     <ImageBrush ImageSource ="Assets/BtnImgs/whitenoise.jpg"></ImageBrush>
@@ -74,15 +74,21 @@
 
             <Button Grid.Row="4" x:Name="fireButton" Content="Crackling Fire" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="fireButton_Click">
 
                 <Button.Background>
-                    <ImageBrush ImageSource ="Assets/BtnImgs/fire2.jpg"></ImageBrush>
+                    <ImageBrush ImageSource ="Assets/BtnImgs/fire.jpg"></ImageBrush>
                 </Button.Background>
             </Button>
 
             <!-- Sound Files - can't be inside <Button> tags -->
-            <MediaElement x:Name="medrain" AutoPlay="False" Source="Assets/Sounds/medrain.mp3" />
+            <MediaElement x:Name="medrain" AutoPlay="False" Source="Assets/Sounds/medrain.mp3" IsLooping="True" />
+            <MediaElement x:Name="waves" AutoPlay="False" Source="Assets/Sounds/waves.mp3" IsLooping="True"/>
+            <MediaElement x:Name="thunder" AutoPlay="False" Source="Assets/Sounds/thunder.mp3" IsLooping="True"/>
+            <MediaElement x:Name="whitenoise" AutoPlay="False" Source="Assets/Sounds/whitenoise.mp3" IsLooping="True"/>
+            <MediaElement x:Name="fire" AutoPlay="False" Source="Assets/Sounds/fire.mp3" IsLooping="True"/>
+
+
 
         </Grid>
     </Grid>

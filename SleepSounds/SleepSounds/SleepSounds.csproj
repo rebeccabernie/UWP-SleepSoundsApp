@@ -89,6 +89,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\BtnImgs\fire.jpg" />
+    <Content Include="Assets\BtnImgs\thunder.jpg" />
+    <Content Include="Assets\BtnImgs\waves.jpg" />
+    <Content Include="Assets\BtnImgs\whitenoise.jpg" />
     <Content Include="Assets\Pacifico.ttf" />
     <Content Include="Assets\Quicksand_Light.otf" />
     <None Include="project.json" />
@@ -110,7 +114,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\BtnImgs\rain.jpg" />
+    <Content Include="Assets\Sounds\cat.wav" />
+    <Content Include="Assets\Sounds\fire.mp3" />
     <Content Include="Assets\Sounds\medrain.mp3" />
+    <Content Include="Assets\Sounds\thunder.mp3" />
+    <Content Include="Assets\Sounds\waves.mp3" />
+    <Content Include="Assets\Sounds\whitenoise.mp3" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
