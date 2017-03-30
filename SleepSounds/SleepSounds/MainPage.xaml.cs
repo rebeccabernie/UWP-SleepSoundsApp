@@ -22,9 +22,25 @@ namespace SleepSounds
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
+        private String[] playing = new String[5];
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        // Arrays
+        void PlayMultiple()//this should loop through an array of names, set the media element name and play
+        {
+            MediaElement me = new MediaElement();
+           
+            for(int i = 0; i < playing.Length; i++)
+            {
+
+                //playing stores the media elements names
+                me.Name = playing[i];
+                me.Play();
+            }
         }
 
         // Count Variables
@@ -34,22 +50,35 @@ namespace SleepSounds
         public int wNoiseC = 0;
         public int fireC = 0;
         public int forThuC = 0;
-        public int forRainC = 0;
         public int cityC = 0;
         public int birdsC = 0;
 
+        //isPlaying Variables
+        public bool rainIP = false;
+        public bool waveIP = false;
+        public bool thunIP = false;
+        public bool whIP = false;
+        public bool fireIP = false;
+        public bool forthunIP = false;
+        public bool cityIP = false;
+        public bool birdsIP = false;
 
-        private void rainButton_Click(object sender, RoutedEventArgs e)
+
+    // Button methods
+    private void rainButton_Click(object sender, RoutedEventArgs e)
         {
             if (rainC == 0)
             {
                 medrain.Play();
                 rainC++;
+                rainIP = true;
+                
             }
             else
             {
                 medrain.Stop();
                 rainC--;
+                rainIP = false;
             }
         }
 
@@ -57,14 +86,16 @@ namespace SleepSounds
         {
             if (waveC == 0)
             {
-                
-               // waves.PlayLooping();
+                waves.Play();
                 waveC++;
+                waveIP = true;
+
             }
             else
             {
                 waves.Stop();
                 waveC--;
+                waveIP = false;
             }
         }
 
@@ -74,11 +105,13 @@ namespace SleepSounds
             {
                 thunder.Play();
                 thunC++;
+                thunIP = true;
             }
             else
             {
                 thunder.Stop();
                 thunC--;
+                thunIP = false;
             }
         }
 
@@ -88,11 +121,13 @@ namespace SleepSounds
             {
                 whitenoise.Play();
                 wNoiseC++;
+                whIP = true;
             }
             else
             {
                 whitenoise.Stop();
                 wNoiseC--;
+                whIP = false;
             }
         }
 
@@ -102,42 +137,14 @@ namespace SleepSounds
             {
                 fire.Play();
                 fireC++;
+                fireIP = true;
             }
             else
             {
                 fire.Stop();
                 fireC--;
+                fireIP = false;
             }
-        }
-
-        private void forThunderButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (forThuC == 0)
-            {
-                forthunder.Play();
-                forThuC++;
-            }
-            else
-            {
-                forthunder.Stop();
-                forThuC--;
-            }
-
-        }
-
-        private void forRainButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (forRainC == 0)
-            {
-                forrain.Play();
-                forRainC++;
-            }
-            else
-            {
-                forrain.Stop();
-                forRainC--;
-            }
-
         }
 
         private void cityButton_Click(object sender, RoutedEventArgs e)
@@ -146,11 +153,13 @@ namespace SleepSounds
             {
                 city.Play();
                 cityC++;
+                cityIP = true;
             }
             else
             {
                 city.Stop();
                 cityC--;
+                cityIP = false;
             }
         }
 
@@ -160,12 +169,45 @@ namespace SleepSounds
             {
                 birds.Play();
                 birdsC++;
+                birdsIP = true;
             }
             else
             {
                 birds.Stop();
                 birdsC--;
+                birdsIP = false;
             }
+        }
+
+        private void createCombo_Click(object sender, RoutedEventArgs e)
+        {
+            MediaElement me = new MediaElement();
+            //playing[0] = ;
+        }
+
+        private void SoundButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button curr = (Button)sender;
+            // get substring
+            string name = curr.Name.Substring(0, curr.Name.IndexOf("_"));
+            MediaElement me = (MediaElement)FindName(name);
+
+            if (me.Tag.ToString() == "N")
+            {
+                me.Play();
+                me.Tag = "Y";
+            }
+            else
+            {
+                me.Stop();
+                me.Tag = "N";
+            }
+
+        }
+
+        private void forRainButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

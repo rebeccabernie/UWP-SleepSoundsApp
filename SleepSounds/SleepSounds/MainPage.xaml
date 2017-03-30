@@ -37,7 +37,7 @@
 
             <Button Grid.Row="0" x:Name="rainButton" Content="Rain" Foreground="White"
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="rainButton_Click">
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
                 <!-- Image as background code adapted from 
                 http://stackoverflow.com/questions/15892290/how-to-change-set-background-image-of-a-button-in-c-sharp-wpf-code -->
@@ -48,7 +48,7 @@
 
             <Button Grid.Row="1" x:Name="wavButton" Content="Waves" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="wavButton_Click">
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
                 <Button.Background>
                     <ImageBrush ImageSource ="Assets/BtnImgs/waves.jpg"></ImageBrush>
@@ -57,7 +57,7 @@
 
             <Button Grid.Row="2" x:Name="thuButton" Content="Thunderstorm" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="thuButton_Click">
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
                 <Button.Background>
                     <ImageBrush ImageSource ="Assets/BtnImgs/thunder.jpg"></ImageBrush>
@@ -66,7 +66,7 @@
 
             <Button Grid.Row="3" x:Name="whnoiButton" Content="White Noise" Foreground="Black" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="whnoiButton_Click">
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
                 <Button.Background>
                     <ImageBrush ImageSource ="Assets/BtnImgs/whitenoise.jpg"></ImageBrush>
@@ -75,7 +75,7 @@
 
             <Button Grid.Row="4" x:Name="fireButton" Content="Crackling Fire" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="fireButton_Click">
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
                 <Button.Background>
                     <ImageBrush ImageSource ="Assets/BtnImgs/fire.jpg"></ImageBrush>
@@ -84,26 +84,16 @@
 
             <Button Grid.Row="5" x:Name="catButton" Content="Cat Purring" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="fireButton_Click">
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
                 <Button.Background>
                     <ImageBrush ImageSource ="Assets/BtnImgs/cat.jpg"></ImageBrush>
                 </Button.Background>
             </Button>
 
-            <Button Grid.Row="6" x:Name="forThunderButton" Content="Forest Thunder" Foreground="White" 
+            <Button Grid.Row="6" x:Name="forRainButton" Content="Forest Rain" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="forThunderButton_Click">
-
-                <Button.Background>
-                    <ImageBrush ImageSource ="Assets/BtnImgs/forthunder.jpg"></ImageBrush>
-                </Button.Background>
-
-            </Button>
-
-            <Button Grid.Row="7" x:Name="forRainButton" Content="Forest Rain" Foreground="White" 
-                    FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="forRainButton_Click">
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
                 <Button.Background>
                     <ImageBrush ImageSource ="Assets/BtnImgs/forestrain.jpg"></ImageBrush>
@@ -111,9 +101,9 @@
                 
             </Button>
 
-            <Button Grid.Row="8" x:Name="cityButton" Content="City" Foreground="White" 
+            <Button Grid.Row="7" x:Name="city_Button" Content="City" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="cityButton_Click">
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
                 <Button.Background>
                     <ImageBrush ImageSource ="Assets/BtnImgs/city4.jpg"></ImageBrush>
@@ -121,28 +111,34 @@
 
             </Button>
 
-            <Button Grid.Row="9" x:Name="birdsButton" Content="Birds" Foreground="White" 
+            <Button Grid.Row="8" x:Name="birds_btn" Content="Birds" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="birdsButton_Click">
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" 
+                    Click="SoundButton_Click">
 
                 <Button.Background>
                     <ImageBrush ImageSource ="Assets/BtnImgs/birds.jpg"></ImageBrush>
                 </Button.Background>
 
             </Button>
-
+            
+            <!-- Create Combo button -->
+            <Button Grid.Row="9" x:Name="createCombo" Content="Save This Combination" Background="CornflowerBlue" Foreground="White" 
+                    FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="15" FontWeight="Bold"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,10,20,10" Click="createCombo_Click"/>
 
             <!-- Sound Files - can't be inside <Button> tags -->
-            <MediaElement x:Name="medrain" AutoPlay="False" Source="Assets/Sounds/medrain.mp3" IsLooping="True" />
+            <MediaElement x:Name="medrain" AutoPlay="False" Source="Assets/Sounds/medrain.mp3" IsLooping="True">
+               
+            </MediaElement>
             <MediaElement x:Name="waves" AutoPlay="False" Source="Assets/Sounds/waves.mp3" IsLooping="True"/>
             <MediaElement x:Name="thunder" AutoPlay="False" Source="Assets/Sounds/thunder.mp3" IsLooping="True"/>
             <MediaElement x:Name="whitenoise" AutoPlay="False" Source="Assets/Sounds/whitenoise.mp3" IsLooping="True"/>
             <MediaElement x:Name="fire" AutoPlay="False" Source="Assets/Sounds/fire.mp3" IsLooping="True"/>
             <MediaElement x:Name="cat" AutoPlay="False" Source="Assets/Sounds/cat.wav" IsLooping="True"/>
-            <MediaElement x:Name="forthunder" AutoPlay="False" Source="Assets/Sounds/forestthunder.mp3" IsLooping="True"/>
-            <MediaElement x:Name="forrain" AutoPlay="False" Source="Assets/Sounds/lightforestrain.mp3" IsLooping="True"/>
-            <MediaElement x:Name="city" AutoPlay="False" Source="Assets/Sounds/citysounds.mp3" IsLooping="True"/>
-            <MediaElement x:Name="birds" AutoPlay="False" Source="Assets/Sounds/birds1.mp3" IsLooping="True"/>
+            <MediaElement x:Name="forrain" AutoPlay="False" Source="Assets/Sounds/forrain.mp3" IsLooping="True"/>
+            <MediaElement Tag="N" x:Name="city" AutoPlay="False" Source="Assets/Sounds/city.mp3" IsLooping="True"/>
+            <MediaElement Tag="N" x:Name="birds" AutoPlay="False" Source="Assets/Sounds/birds.mp3" IsLooping="True"/>
 
         </Grid>
     </Grid>
