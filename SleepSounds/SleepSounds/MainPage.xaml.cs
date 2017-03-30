@@ -33,6 +33,10 @@ namespace SleepSounds
         public int thunC = 0;
         public int wNoiseC = 0;
         public int fireC = 0;
+        public int forThuC = 0;
+        public int forRainC = 0;
+        public int cityC = 0;
+        public int birdsC = 0;
 
 
         private void rainButton_Click(object sender, RoutedEventArgs e)
@@ -103,6 +107,64 @@ namespace SleepSounds
             {
                 fire.Stop();
                 fireC--;
+            }
+        }
+
+        private void forThunderButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (forThuC == 0)
+            {
+                forthunder.Play();
+                forThuC++;
+            }
+            else
+            {
+                forthunder.Stop();
+                forThuC--;
+            }
+
+        }
+
+        private void forRainButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (forRainC == 0)
+            {
+                forrain.Play();
+                forRainC++;
+            }
+            else
+            {
+                forrain.Stop();
+                forRainC--;
+            }
+
+        }
+
+        private void cityButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (cityC == 0)
+            {
+                city.Play();
+                cityC++;
+            }
+            else
+            {
+                city.Stop();
+                cityC--;
+            }
+        }
+
+        private void birdsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (birdsC == 0)
+            {
+                birds.Play();
+                birdsC++;
+            }
+            else
+            {
+                birds.Stop();
+                birdsC--;
             }
         }
     }

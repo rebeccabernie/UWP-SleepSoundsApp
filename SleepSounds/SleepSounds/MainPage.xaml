@@ -29,6 +29,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
 
     <!-- Buttons -->
@@ -81,14 +82,67 @@
                 </Button.Background>
             </Button>
 
+            <Button Grid.Row="5" x:Name="catButton" Content="Cat Purring" Foreground="White" 
+                    FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="fireButton_Click">
+
+                <Button.Background>
+                    <ImageBrush ImageSource ="Assets/BtnImgs/cat.jpg"></ImageBrush>
+                </Button.Background>
+            </Button>
+
+            <Button Grid.Row="6" x:Name="forThunderButton" Content="Forest Thunder" Foreground="White" 
+                    FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="forThunderButton_Click">
+
+                <Button.Background>
+                    <ImageBrush ImageSource ="Assets/BtnImgs/forthunder.jpg"></ImageBrush>
+                </Button.Background>
+
+            </Button>
+
+            <Button Grid.Row="7" x:Name="forRainButton" Content="Forest Rain" Foreground="White" 
+                    FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="forRainButton_Click">
+
+                <Button.Background>
+                    <ImageBrush ImageSource ="Assets/BtnImgs/forestrain.jpg"></ImageBrush>
+                </Button.Background>
+                
+            </Button>
+
+            <Button Grid.Row="8" x:Name="cityButton" Content="City" Foreground="White" 
+                    FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="cityButton_Click">
+
+                <Button.Background>
+                    <ImageBrush ImageSource ="Assets/BtnImgs/city4.jpg"></ImageBrush>
+                </Button.Background>
+
+            </Button>
+
+            <Button Grid.Row="9" x:Name="birdsButton" Content="Birds" Foreground="White" 
+                    FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="birdsButton_Click">
+
+                <Button.Background>
+                    <ImageBrush ImageSource ="Assets/BtnImgs/birds.jpg"></ImageBrush>
+                </Button.Background>
+
+            </Button>
+
+
             <!-- Sound Files - can't be inside <Button> tags -->
             <MediaElement x:Name="medrain" AutoPlay="False" Source="Assets/Sounds/medrain.mp3" IsLooping="True" />
             <MediaElement x:Name="waves" AutoPlay="False" Source="Assets/Sounds/waves.mp3" IsLooping="True"/>
             <MediaElement x:Name="thunder" AutoPlay="False" Source="Assets/Sounds/thunder.mp3" IsLooping="True"/>
             <MediaElement x:Name="whitenoise" AutoPlay="False" Source="Assets/Sounds/whitenoise.mp3" IsLooping="True"/>
             <MediaElement x:Name="fire" AutoPlay="False" Source="Assets/Sounds/fire.mp3" IsLooping="True"/>
-
-
+            <MediaElement x:Name="cat" AutoPlay="False" Source="Assets/Sounds/cat.wav" IsLooping="True"/>
+            <MediaElement x:Name="forthunder" AutoPlay="False" Source="Assets/Sounds/forestthunder.mp3" IsLooping="True"/>
+            <MediaElement x:Name="forrain" AutoPlay="False" Source="Assets/Sounds/lightforestrain.mp3" IsLooping="True"/>
+            <MediaElement x:Name="city" AutoPlay="False" Source="Assets/Sounds/citysounds.mp3" IsLooping="True"/>
+            <MediaElement x:Name="birds" AutoPlay="False" Source="Assets/Sounds/birds1.mp3" IsLooping="True"/>
 
         </Grid>
     </Grid>
