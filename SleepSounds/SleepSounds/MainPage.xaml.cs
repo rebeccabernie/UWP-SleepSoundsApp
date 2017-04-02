@@ -57,9 +57,10 @@ namespace SleepSounds
                 // Tag is set to Y (i.e. is playing), stop the sound and set tag to N
                 me.Stop();
                 me.Tag = "N";
-                playing.Replace(("," + me.Name), "");   // Remove from playing list / replace with nothing
+                playing.Replace(me.Name, "");   // Remove from playing list / replace with nothing
+
             }
-               
+
         } // end sound buttons
 
         
@@ -69,17 +70,26 @@ namespace SleepSounds
             // Create a folder and file if it doesn't exist
             StorageFolder storageFolder =
                 ApplicationData.Current.LocalFolder;    // set folder to current working directory
-            StorageFile sampleFile =
-                await storageFolder.CreateFileAsync("sample.txt",
-                    CreationCollisionOption.ReplaceExisting); // Make new & replace if file already exists
+            StorageFile playlists =
+                await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists); // Make new
+
+            String playlistName = this.inputText.Text.ToString();
+            String playlistfull = playlistName + ":" + playing; // insert name of playlist at start of playing string
 
             // Write data to the file
-            await FileIO.WriteTextAsync(sampleFile, playing);
+            await FileIO.AppendTextAsync(playlists, playlistfull + Environment.NewLine); // Environment.NewLine sets pointer to new line for next entry
             // Read data from file
-            string text = await FileIO.ReadTextAsync(sampleFile);
+            //await FileIO.ReadTextAsync(playlists);
 
-            System.Diagnostics.Debug.WriteLine(text);
+            System.Diagnostics.Debug.WriteLine(await FileIO.ReadTextAsync(playlists)); // test, print to the debug console
+            //System.Diagnostics.Debug.WriteLine(playlistName);
 
+            playing = "";
+        }
+
+        private void stopAll_Click(object sender, RoutedEventArgs e)
+        {
+            playing.Remove(0); // remove all from playing list
         }
     } // end mainpage
 

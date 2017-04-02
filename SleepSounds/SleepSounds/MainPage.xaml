@@ -34,14 +34,15 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
             <!-- Buttons -->
             <!-- Quicksand_Light is in Quicksand font family -->
 
-            <Button Grid.Row="0" Grid.ColumnSpan="2" x:Name="rain_Btn" Content="Rain" Foreground="White"
+            <Button Grid.Row="0" Grid.ColumnSpan="3" x:Name="rain_Btn" Content="Rain" Foreground="White"
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
@@ -52,7 +53,7 @@
                 </Button.Background>
             </Button>
 
-            <Button Grid.Row="1" Grid.ColumnSpan="2" x:Name="waves_Btn" Content="Waves" Foreground="White" 
+            <Button Grid.Row="1" Grid.ColumnSpan="3" x:Name="waves_Btn" Content="Waves" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
@@ -61,7 +62,7 @@
                 </Button.Background>
             </Button>
 
-            <Button Grid.Row="2" Grid.ColumnSpan="2" x:Name="thunder_Btn" Content="Thunderstorm" Foreground="White" 
+            <Button Grid.Row="2" Grid.ColumnSpan="3" x:Name="thunder_Btn" Content="Thunderstorm" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
@@ -70,7 +71,7 @@
                 </Button.Background>
             </Button>
 
-            <Button Grid.Row="3" Grid.ColumnSpan="2" x:Name="whitenoise_Btn" Content="White Noise" Foreground="Black" 
+            <Button Grid.Row="3" Grid.ColumnSpan="3" x:Name="whitenoise_Btn" Content="White Noise" Foreground="Black" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
@@ -79,7 +80,7 @@
                 </Button.Background>
             </Button>
 
-            <Button Grid.Row="4" Grid.ColumnSpan="2" x:Name="fire_Btn" Content="Crackling Fire" Foreground="White" 
+            <Button Grid.Row="4" Grid.ColumnSpan="3" x:Name="fire_Btn" Content="Crackling Fire" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
@@ -88,7 +89,7 @@
                 </Button.Background>
             </Button>
 
-            <Button Grid.Row="5" Grid.ColumnSpan="2" x:Name="cat_Btn" Content="Cat Purring" Foreground="White" 
+            <Button Grid.Row="5" Grid.ColumnSpan="3" x:Name="cat_Btn" Content="Cat Purring" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
@@ -97,7 +98,7 @@
                 </Button.Background>
             </Button>
 
-            <Button Grid.Row="6" Grid.ColumnSpan="2" x:Name="forrain_Btn" Content="Forest Rain" Foreground="White" 
+            <Button Grid.Row="6" Grid.ColumnSpan="3" x:Name="forrain_Btn" Content="Forest Rain" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
@@ -107,7 +108,7 @@
 
             </Button>
 
-            <Button Grid.Row="7" Grid.ColumnSpan="2" x:Name="city_Btn" Content="City" Foreground="White" 
+            <Button Grid.Row="7" Grid.ColumnSpan="3" x:Name="city_Btn" Content="City" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" Click="SoundButton_Click">
 
@@ -117,7 +118,7 @@
 
             </Button>
 
-            <Button Grid.Row="8" Grid.ColumnSpan="2" x:Name="birds_Btn" Content="Birds" Foreground="White" 
+            <Button Grid.Row="8" Grid.ColumnSpan="3" x:Name="birds_Btn" Content="Birds" Foreground="White" 
                     FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="25" FontWeight="Bold"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0" 
                     Click="SoundButton_Click">
@@ -129,10 +130,10 @@
             </Button>
 
             <!--#region Create a combo-->
-            <TextBox Grid.Row="9" Grid.Column="0" x:Name="playlistName" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            <TextBox Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Name="inputText" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                      TextWrapping="Wrap" PlaceholderText="Playlist Name" TextAlignment="Center" Margin="0,10,5,10"/>
 
-            <Button Grid.Row="9" Grid.Column="1" x:Name="createCombo" Content="Save Combo" Background="CornflowerBlue" Foreground="White" 
+            <Button Grid.Row="9" Grid.Column="2" x:Name="createCombo" Content="Save Combo" Background="CornflowerBlue" Foreground="White" 
                         FontFamily="Assets\Quicksand_Light.otf#Quicksand" FontSize="13" FontWeight="Bold"
                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,10,5,10" Click="createCombo_Click"/>
             <!--#endregion-->
