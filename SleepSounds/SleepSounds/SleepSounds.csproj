@@ -91,10 +91,9 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Content Include="Assets\BtnImgs\birds.jpg" />
     <Content Include="Assets\BtnImgs\cat.jpg" />
-    <Content Include="Assets\BtnImgs\city4.jpg" />
+    <Content Include="Assets\BtnImgs\city.jpg" />
     <Content Include="Assets\BtnImgs\fire.jpg" />
-    <Content Include="Assets\BtnImgs\forestrain.jpg" />
-    <Content Include="Assets\BtnImgs\forthunder.jpg" />
+    <Content Include="Assets\BtnImgs\forest.jpg" />
     <Content Include="Assets\BtnImgs\thunder.jpg" />
     <Content Include="Assets\BtnImgs\waves.jpg" />
     <Content Include="Assets\BtnImgs\whitenoise.jpg" />
@@ -119,13 +118,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\BtnImgs\rain.jpg" />
-    <Content Include="Assets\Sounds\birds1.mp3" />
+    <Content Include="Assets\Sounds\birds.mp3" />
     <Content Include="Assets\Sounds\cat.wav" />
-    <Content Include="Assets\Sounds\citysounds.mp3" />
+    <Content Include="Assets\Sounds\city.mp3" />
     <Content Include="Assets\Sounds\fire.mp3" />
-    <Content Include="Assets\Sounds\forestthunder.mp3" />
-    <Content Include="Assets\Sounds\lightforestrain.mp3" />
-    <Content Include="Assets\Sounds\medrain.mp3" />
+    <Content Include="Assets\Sounds\forrain.mp3" />
+    <Content Include="Assets\Sounds\rain.mp3" />
     <Content Include="Assets\Sounds\thunder.mp3" />
     <Content Include="Assets\Sounds\waves.mp3" />
     <Content Include="Assets\Sounds\whitenoise.mp3" />
