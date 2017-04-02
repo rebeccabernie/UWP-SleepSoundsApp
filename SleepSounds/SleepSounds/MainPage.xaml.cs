@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -31,7 +32,7 @@ namespace SleepSounds
 
         String[] songs = new String[] 
             { "birds", "cat", "city", "fire", "forrain", "rain", "thunder", "waves,", "whitenoise" };
-        String[] playing = new String[]{ }; // currently playing
+        String playing; // currently playing, set to empty
 
         public MainPage()
         {
@@ -50,31 +51,35 @@ namespace SleepSounds
                 // if the tag is set to N (i.e. not playing), play sound and set to Y (playing)
                 me.Play();
                 me.Tag = "Y";
+                playing += ("," + me.Name); // Add to playing list
             }
             else{
                 // Tag is set to Y (i.e. is playing), stop the sound and set tag to N
                 me.Stop();
                 me.Tag = "N";
+                playing.Replace(("," + me.Name), "");   // Remove from playing list / replace with nothing
             }
-                
+               
         } // end sound buttons
 
-        private void createCombo_Click(object sender, RoutedEventArgs e)
+        
+
+        private async void createCombo_Click(object sender, RoutedEventArgs e)
         {
-            localSettings.Values["exampleSetting"] = "Hello Windows";
-            Object value = localSettings.Values["exampleSetting"];
-            
-            foreach (String i in songs)
-            {
-                //if ()
-                    // song is playing, add to playing array
+            // Create a folder and file if it doesn't exist
+            StorageFolder storageFolder =
+                ApplicationData.Current.LocalFolder;    // set folder to current working directory
+            StorageFile sampleFile =
+                await storageFolder.CreateFileAsync("sample.txt",
+                    CreationCollisionOption.ReplaceExisting); // Make new & replace if file already exists
 
-            }
+            // Write data to the file
+            await FileIO.WriteTextAsync(sampleFile, playing);
+            // Read data from file
+            string text = await FileIO.ReadTextAsync(sampleFile);
 
-            /*
-            StorageFile sampleFile = await localFolder.CreateFileAsync("dataFile.txt",
-                CreationCollisionOption.ReplaceExisting);
-            await FileIO.WriteTextAsync(sampleFile, value.ToString);*/
+            System.Diagnostics.Debug.WriteLine(text);
+
         }
     } // end mainpage
 

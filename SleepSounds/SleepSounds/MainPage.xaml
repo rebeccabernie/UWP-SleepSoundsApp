@@ -6,17 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
-    <Page.Resources>
-        <MenuFlyout x:Key="Combos">
-            
-        </MenuFlyout>
-    </Page.Resources>
+   
 
     <!-- Code for adding custom fonts adapted from 
          http://www.c-sharpcorner.com/article/custom-fonts-in-windows-10-uwp-app/-->
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" FlyoutBase.AttachedFlyout="{StaticResource Combos}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid Background="Black" VerticalAlignment="Top" Height="40">
             <TextBlock x:Name="title" Text="Sleep Sounds"
                    FontFamily="Assets/Pacifico.ttf#Pacifico" Foreground="White" FontSize="20"
