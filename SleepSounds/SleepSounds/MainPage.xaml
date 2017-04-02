@@ -17,6 +17,14 @@
                    FontFamily="Assets/Pacifico.ttf#Pacifico" Foreground="White" FontSize="20"
                    FontStyle="Italic" 
                    HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center"/>
+
+            <Button HorizontalAlignment="Right" Foreground="White" Content="Options" Name="flyout_btn" Click="flyout_btn_Click">
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="" Name="item" Click="item_Click"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
         </Grid>
 
         <Grid Background="Black" Margin="0,40,0,0">

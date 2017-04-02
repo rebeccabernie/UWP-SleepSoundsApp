@@ -63,33 +63,78 @@ namespace SleepSounds
 
         } // end sound buttons
 
-        
-
         private async void createCombo_Click(object sender, RoutedEventArgs e)
         {
+            // Read/Write functions adapted from https://docs.microsoft.com/en-us/windows/uwp/files/quickstart-reading-and-writing-files
+
             // Create a folder and file if it doesn't exist
             StorageFolder storageFolder =
                 ApplicationData.Current.LocalFolder;    // set folder to current working directory
             StorageFile playlists =
                 await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists); // Make new
 
-            String playlistName = this.inputText.Text.ToString();
-            String playlistfull = playlistName + ":" + playing; // insert name of playlist at start of playing string
+            // Insert name of playlist at start of playing string
+            String comboName = this.inputText.Text.ToString();
+            String playlist = comboName + "|" + playing;
 
             // Write data to the file
-            await FileIO.AppendTextAsync(playlists, playlistfull + Environment.NewLine); // Environment.NewLine sets pointer to new line for next entry
+            await FileIO.AppendTextAsync(playlists, playlist + Environment.NewLine); // Environment.NewLine sets pointer to new line for next entry
             // Read data from file
             //await FileIO.ReadTextAsync(playlists);
 
             System.Diagnostics.Debug.WriteLine(await FileIO.ReadTextAsync(playlists)); // test, print to the debug console
-            //System.Diagnostics.Debug.WriteLine(playlistName);
 
-            playing = "";
+            playing = ""; // reset the playing string when user saves a combo
         }
 
         private void stopAll_Click(object sender, RoutedEventArgs e)
         {
-            playing.Remove(0); // remove all from playing list
+            playing = ""; // reset playing string
+        }
+
+        private async void flyout_btn_Click(object sender, RoutedEventArgs e)
+        {
+            // Open and read contents of file
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            StorageFile playlists = await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists);
+            var text = await FileIO.ReadLinesAsync(playlists); // read playlists file as lines
+
+            foreach (var line in text) // loop through each line, adapted from http://stackoverflow.com/questions/22922403/not-looping-through-every-line-only-looking-at-first-line-c-sharp
+            {
+                string name = "" + line.Split('|')[0]; // split each line at the |, set name to string at index 0 (before the |, i.e. the name)
+                System.Diagnostics.Debug.WriteLine("name: "+ name); // testing
+
+                item.Text = name;
+            }
+
+        }
+
+        private async void item_Click(object sender, RoutedEventArgs e)
+        {
+            // Open and read contents of file
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            StorageFile playlists = await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists);
+
+            var text = await FileIO.ReadLinesAsync(playlists); // read playlists file as lines
+            
+            foreach (var line in text)
+            {
+                int i = 0;
+                while (i == 0){
+                    if (line.StartsWith(item.Name))
+                    {
+                        birds.Play();
+                        i = 1;
+                    }
+                     
+                    else{
+                        city.Play();
+                    }
+
+                }
+                
+                    
+            }
         }
     } // end mainpage
 
