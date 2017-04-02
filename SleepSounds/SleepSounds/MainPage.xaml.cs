@@ -45,7 +45,18 @@ namespace SleepSounds
             string name = curr.Name.Substring(0, curr.Name.IndexOf("_")); // get the name of the click event before the _
             MediaElement me = (MediaElement)FindName(name); // set media element = new name
 
-            me.Play();
+            // If / Else for stop/start on buttons
+            if(me.Tag.ToString() == "N"){ 
+                // if the tag is set to N (i.e. not playing), play sound and set to Y (playing)
+                me.Play();
+                me.Tag = "Y";
+            }
+            else{
+                // Tag is set to Y (i.e. is playing), stop the sound and set tag to N
+                me.Stop();
+                me.Tag = "N";
+            }
+                
         } // end sound buttons
 
         private void createCombo_Click(object sender, RoutedEventArgs e)
