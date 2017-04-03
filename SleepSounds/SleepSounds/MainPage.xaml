@@ -5,7 +5,7 @@
     xmlns:local="using:SleepSounds"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" >
    
 
     <!-- Code for adding custom fonts adapted from 
@@ -21,7 +21,7 @@
             <Button HorizontalAlignment="Right" Foreground="White" Content="Options" Name="flyout_btn" Click="flyout_btn_Click">
                 <Button.Flyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem Text="" Name="item" Click="item_Click"/>
+                        <MenuFlyoutItem Text="" x:Name="item" Click="item_Click"/>
                     </MenuFlyout>
                 </Button.Flyout>
             </Button>
@@ -147,9 +147,6 @@
             <!--#endregion-->
             
             <!--#region Sound Files - can't be inside <Button> tags -->
-            <MediaElement x:Name="medrain" AutoPlay="False" Source="Assets/Sounds/medrain.mp3" IsLooping="True">
-
-            </MediaElement>
             <MediaElement Tag="N" x:Name="rain" AutoPlay="False" Source="Assets/Sounds/rain.mp3" IsLooping="True"/>
             <MediaElement Tag="N" x:Name="waves" AutoPlay="False" Source="Assets/Sounds/waves.mp3" IsLooping="True"/>
             <MediaElement Tag="N" x:Name="thunder" AutoPlay="False" Source="Assets/Sounds/thunder.mp3" IsLooping="True"/>

@@ -30,7 +30,7 @@ namespace SleepSounds
         Windows.Storage.StorageFolder localFolder =
             Windows.Storage.ApplicationData.Current.LocalFolder;
 
-        String[] songs = new String[] 
+        String[] songs = new String[]
             { "birds", "cat", "city", "fire", "forrain", "rain", "thunder", "waves,", "whitenoise" };
         String playing; // currently playing, set to empty
 
@@ -47,13 +47,15 @@ namespace SleepSounds
             MediaElement me = (MediaElement)FindName(name); // set media element = new name
 
             // If / Else for stop/start on buttons
-            if(me.Tag.ToString() == "N"){ 
+            if (me.Tag.ToString() == "N")
+            {
                 // if the tag is set to N (i.e. not playing), play sound and set to Y (playing)
                 me.Play();
                 me.Tag = "Y";
                 playing += ("," + me.Name); // Add to playing list
             }
-            else{
+            else
+            {
                 // Tag is set to Y (i.e. is playing), stop the sound and set tag to N
                 me.Stop();
                 me.Tag = "N";
@@ -102,7 +104,7 @@ namespace SleepSounds
             foreach (var line in text) // loop through each line, adapted from http://stackoverflow.com/questions/22922403/not-looping-through-every-line-only-looking-at-first-line-c-sharp
             {
                 string name = "" + line.Split('|')[0]; // split each line at the |, set name to string at index 0 (before the |, i.e. the name)
-                System.Diagnostics.Debug.WriteLine("name: "+ name); // testing
+                //System.Diagnostics.Debug.WriteLine("name: "+ name); // testing
 
                 item.Text = name;
             }
@@ -116,26 +118,27 @@ namespace SleepSounds
             StorageFile playlists = await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists);
 
             var text = await FileIO.ReadLinesAsync(playlists); // read playlists file as lines
-            
+
             foreach (var line in text)
             {
-                int i = 0;
-                while (i == 0){
-                    if (line.StartsWith(item.Name))
+                if (line.StartsWith(item.Text) == true)
+                {
+                    string name = "" + line.Split('|')[0]; // split each line at the |, set name to string at index 0 (before the |, i.e. the name)
+                    string songs = "" + line.Split('|')[1];
+                    System.Diagnostics.Debug.WriteLine("name: " + name + ", " + item.Text);
+
+                    while (songs != null)
                     {
-                        birds.Play();
-                        i = 1;
+                        string song = songs.Split(',')[i];
                     }
-                     
-                    else{
-                        city.Play();
-                    }
-
                 }
-                
-                    
-            }
-        }
-    } // end mainpage
+                else { }
 
+            }
+
+            //System.Diagnostics.Debug.WriteLine("name: " + name + ", " + item.Text);
+
+        }
+    }// end mainpage
 } // end app
+
