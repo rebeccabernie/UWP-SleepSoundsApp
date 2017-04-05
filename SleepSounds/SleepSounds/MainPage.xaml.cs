@@ -30,6 +30,10 @@ namespace SleepSounds
         Windows.Storage.StorageFolder localFolder =
             Windows.Storage.ApplicationData.Current.LocalFolder;
 
+        List<string> _listNames;
+        List<string> _playListsFromFile;
+
+
         String[] songs = new String[]
             { "birds", "cat", "city", "fire", "forrain", "rain", "thunder", "waves,", "whitenoise" };
         String playing; // currently playing, set to empty
@@ -37,6 +41,32 @@ namespace SleepSounds
         public MainPage()
         {
             this.InitializeComponent();
+            initPlaylists();
+        }
+
+        private async void initPlaylists()
+        {
+            StorageFolder storageFolder =
+                ApplicationData.Current.LocalFolder;    // set folder to current working directory
+            StorageFile playlists =
+                await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists); // Make new
+
+            //System.Diagnostics.Debug.Write("menu clicked");
+            var text = await FileIO.ReadLinesAsync(playlists); // read playlists file as lines
+            foreach (var line in text) // loop through each line, adapted from http://stackoverflow.com/questions/22922403/not-looping-through-every-line-only-looking-at-first-line-c-sharp
+            {
+                string name = "" + line.Split('|')[0]; // split each line at the |, set name to string at index 0 (before the |, i.e. the name)
+
+                itemNew = new MenuFlyoutItem();
+                itemNew.Name = name;
+                itemNew.Text = name;
+                itemNew.Tapped += ItemNew_Tapped;
+
+                if (!xMenuFlyout.Items.Contains(itemNew))
+                    xMenuFlyout.Items.Add(itemNew);
+                else { } // do nothing
+
+            }
         }
 
         // Sound buttons
@@ -52,7 +82,14 @@ namespace SleepSounds
                 // if the tag is set to N (i.e. not playing), play sound and set to Y (playing)
                 me.Play();
                 me.Tag = "Y";
-                playing += ("," + me.Name); // Add to playing list
+                if( playing == "")
+                {
+                    playing += me.Name;
+                }
+                else
+                {
+                    playing += ("," + me.Name); // Add to playing list
+                }
             }
             else
             {
@@ -65,6 +102,7 @@ namespace SleepSounds
 
         } // end sound buttons
 
+        MenuFlyoutItem itemNew;
         private async void createCombo_Click(object sender, RoutedEventArgs e)
         {
             // Read/Write functions adapted from https://docs.microsoft.com/en-us/windows/uwp/files/quickstart-reading-and-writing-files
@@ -87,56 +125,119 @@ namespace SleepSounds
             System.Diagnostics.Debug.WriteLine(await FileIO.ReadTextAsync(playlists)); // test, print to the debug console
 
             playing = ""; // reset the playing string when user saves a combo
+
+           
+            itemNew = new MenuFlyoutItem();
+            itemNew.Name = comboName;
+            itemNew.Text = comboName;
+            itemNew.Tapped += ItemNew_Tapped;
+
+            if (!xMenuFlyout.Items.Contains(itemNew))
+                xMenuFlyout.Items.Add(itemNew);
+            else { } // do nothing
+
         }
 
-        private void stopAll_Click(object sender, RoutedEventArgs e)
-        {
-            playing = ""; // reset playing string
-        }
+        //private async void populateMenu()
+        //{
+        //    // Open and read contents of file
+        //    StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+        //    StorageFile playlists = await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists);
+        //    var text = await FileIO.ReadLinesAsync(playlists); // read playlists file as lines
 
-        private async void flyout_btn_Click(object sender, RoutedEventArgs e)
+        //    var lineCount = File.ReadLines(@"C:\playlists.txt").Count();
+
+        //    foreach (var line in text) // loop through each line, adapted from http://stackoverflow.com/questions/22922403/not-looping-through-every-line-only-looking-at-first-line-c-sharp
+        //    {
+        //        string name = "" + line.Split('|')[0]; // split each line at the |, set name to string at index 0 (before the |, i.e. the name)
+
+        //        itemNew = new MenuFlyoutItem();
+        //        itemNew.Name = name;
+        //        itemNew.Text = name;
+        //        itemNew.Tapped += ItemNew_Tapped;
+        //        itemNew.Holding += item_Holding;
+        //        xMenuFlyout.Items.Add(itemNew);
+        //    }
+
+
+        //}
+
+        //MenuFlyoutItem itemNew;
+        //private async void flyout_btn_Click(object sender, RoutedEventArgs e)
+        //{
+
+            
+        //}
+
+        private async void ItemNew_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            MenuFlyoutItem curr = (MenuFlyoutItem)sender;
             // Open and read contents of file
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
             StorageFile playlists = await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists);
-            var text = await FileIO.ReadLinesAsync(playlists); // read playlists file as lines
-
-            foreach (var line in text) // loop through each line, adapted from http://stackoverflow.com/questions/22922403/not-looping-through-every-line-only-looking-at-first-line-c-sharp
-            {
-                string name = "" + line.Split('|')[0]; // split each line at the |, set name to string at index 0 (before the |, i.e. the name)
-                //System.Diagnostics.Debug.WriteLine("name: "+ name); // testing
-
-                item.Text = name;
-            }
-
-        }
-
-        private async void item_Click(object sender, RoutedEventArgs e)
-        {
-            // Open and read contents of file
-            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
-            StorageFile playlists = await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists);
 
             var text = await FileIO.ReadLinesAsync(playlists); // read playlists file as lines
 
+            List<string> songNames = new List<string>();
             foreach (var line in text)
             {
-                if (line.StartsWith(item.Text) == true)
+                if (line.StartsWith(curr.Text) == true)
                 {
-                    string name = "" + line.Split('|')[0]; // split each line at the |, set name to string at index 0 (before the |, i.e. the name)
-                    string songs = "" + line.Split('|')[1];
-                    System.Diagnostics.Debug.WriteLine("name: " + name + ", " + item.Text);
+                    string name = line.Split('|')[0]; // split each line at the |, set name to string at index 0 (before the |, i.e. the name)
+                    string songs = line.Split('|')[1];
+                    System.Diagnostics.Debug.WriteLine("name: " + name + ", " + curr.Text);
 
-                    while (songs != null)
-                    {
-                        string song = songs.Split(',')[i];
-                    }
+                    string[] split = songs.Split(',');
+
+                    //int start = 1;
+                    //while (songs != null)
+                    //{
+                    //    string song = songs.Substring(start, songs.IndexOf(",") - start);
+                    //    songNames.Add(song);
+                    //    start = songs.IndexOf(",") + 1;
+                    //}
+
                 }
                 else { }
 
             }
+        }
 
-            //System.Diagnostics.Debug.WriteLine("name: " + name + ", " + item.Text);
+        //private async void item_Click(object sender, RoutedEventArgs e)
+        //{
+        //    // Open and read contents of file
+        //    StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+        //    StorageFile playlists = await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists);
+
+        //    var text = await FileIO.ReadLinesAsync(playlists); // read playlists file as lines
+
+        //    List<string> songNames = new List<string>();
+        //    foreach (var line in text)
+        //    {
+        //        if (line.StartsWith(item.Text) == true)
+        //        {
+        //            string name = "" + line.Split('|')[0]; // split each line at the |, set name to string at index 0 (before the |, i.e. the name)
+        //            string songs = "" + line.Split('|')[1];
+        //            System.Diagnostics.Debug.WriteLine("name: " + name + ", " + item.Text);
+
+        //            int start = 1;
+        //            while (songs != null)
+        //            {
+        //                string song = songs.Substring(start, songs.IndexOf(","));
+        //                songNames.Add(song);
+        //                start = songs.IndexOf(",") + 1;
+        //            }
+        //        }
+        //        else { }
+
+        //    }
+
+        //    //System.Diagnostics.Debug.WriteLine("name: " + name + ", " + item.Text);
+
+        //}
+
+        private async void flyout_btn_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }// end mainpage

@@ -20,8 +20,7 @@
 
             <Button HorizontalAlignment="Right" Foreground="White" Content="Options" Name="flyout_btn" Click="flyout_btn_Click">
                 <Button.Flyout>
-                    <MenuFlyout>
-                        <MenuFlyoutItem Text="" x:Name="item" Click="item_Click"/>
+                    <MenuFlyout x:Name="xMenuFlyout">
                     </MenuFlyout>
                 </Button.Flyout>
             </Button>
@@ -47,7 +46,7 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- Buttons -->
+            <!-- #region Sound Buttons -->
             <!-- Quicksand_Light is in Quicksand font family -->
 
             <Button Grid.Row="0" Grid.ColumnSpan="3" x:Name="rain_Btn" Content="Rain" Foreground="White"
@@ -136,6 +135,7 @@
                 </Button.Background>
 
             </Button>
+            <!--#endregion-->
 
             <!--#region Create a combo-->
             <TextBox Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Name="inputText" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
