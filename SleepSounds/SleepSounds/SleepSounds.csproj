@@ -98,6 +98,7 @@
     <Content Include="Assets\BtnImgs\waves.jpg" />
     <Content Include="Assets\BtnImgs\whitenoise.jpg" />
     <Content Include="Assets\Pacifico.ttf" />
+    <Content Include="Assets\portraitbackground.jpg" />
     <Content Include="Assets\Quicksand_Light.otf" />
     <None Include="project.json" />
   </ItemGroup>
