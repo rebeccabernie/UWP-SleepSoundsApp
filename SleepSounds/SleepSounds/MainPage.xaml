@@ -22,7 +22,8 @@
                    FontFamily="Assets/Pacifico.ttf#Pacifico" Foreground="LightSteelBlue" FontSize="20"
                    HorizontalAlignment="Left" TextWrapping="Wrap" Margin="20,0,0,0"  VerticalAlignment="Center"/>
 
-            <Button HorizontalAlignment="Right" Foreground="LightSteelBlue" Content="Playlists" Name="flyout_btn" Click="flyout_btn_Click">
+            <Button HorizontalAlignment="Right" Margin="0,0,20,0" Foreground="LightSteelBlue" Content="Playlists" 
+                    Name="flyout_btn" Click="flyout_btn_Click">
                 <Button.Flyout>
                     <MenuFlyout x:Name="xMenuFlyout">
                     </MenuFlyout>
@@ -31,8 +32,7 @@
         </Grid>
         <!--#endregion-->
 
-        <ScrollViewer>
-
+        <ScrollViewer Margin="0,40,0,0">
             <Grid Margin="0,40,0,0" Height="750">
 
                 <Grid.RowDefinitions>
@@ -140,9 +140,8 @@
                 <!--#endregion-->
 
             </Grid>
+
         </ScrollViewer>
-
-
 
         <!--#region Create a combo-->
         <Grid VerticalAlignment="Bottom" Background="Black">

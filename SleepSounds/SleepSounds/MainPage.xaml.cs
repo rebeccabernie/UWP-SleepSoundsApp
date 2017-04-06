@@ -25,7 +25,8 @@ namespace SleepSounds
     public sealed partial class MainPage : Page
     {
         MenuFlyoutItem itemNew;
-        String addToPlaylist; // keep track of what to add to playlist, initialise as null
+        //String addToPlaylist; // keep track of what to add to playlist, initialise as null
+        String[] songsList = { "birds", "cat", "city", "fire", "forrain", "rain", "thunder", "waves", "whitenoise" };
 
         public MainPage()
         {
@@ -62,11 +63,8 @@ namespace SleepSounds
             }
         }
 
-        // Sound buttons
-        private void SoundButton_Click(object sender, RoutedEventArgs e)
+        private void playSound(string name)
         {
-            Button curr = (Button)sender; // get the click event object (i.e. current sound)
-            string name = curr.Name.Substring(0, curr.Name.IndexOf("_")); // get the name of the click event before the _ (birds instead of birds_Click etc)
             MediaElement me = (MediaElement)FindName(name); // set media element to be played = name
 
             // If / Else for stop/start on buttons
@@ -76,29 +74,49 @@ namespace SleepSounds
                 me.Play();
                 System.Diagnostics.Debug.WriteLine("Playing: " + me.Name); // testing
                 me.Tag = "Y";
-
-                //if(addToPlaylist == null) 
-                //{
-                    addToPlaylist += (me.Name + ",");
-                    System.Diagnostics.Debug.WriteLine("add: " + addToPlaylist);
-                //}
-
-                //else
-                //{
-                //    addToPlaylist += "," + me.Name;
-                //    System.Diagnostics.Debug.WriteLine("add: " + addToPlaylist);
-                //}
+                //addToPlaylist += (me.Name + ",");
+                //System.Diagnostics.Debug.WriteLine("add: " + addToPlaylist);
             }
             else
             {
                 // Tag is set to Y (i.e. is playing), stop the sound and set tag to N, remove it from addToPlaylist string
-                addToPlaylist = addToPlaylist.Replace(me.Name, null); // replace current element with an empty string
+                //addToPlaylist = addToPlaylist.Replace(me.Name, null); // replace current element with an empty string
                 me.Stop();
                 me.Tag = "N";
                 System.Diagnostics.Debug.WriteLine(me.Name + " stopped"); // testing
-                System.Diagnostics.Debug.WriteLine("add: " + addToPlaylist); // testing
+                //System.Diagnostics.Debug.WriteLine("add: " + addToPlaylist); // testing
 
             }
+
+        }
+
+        private void playPlaylist(string songs)
+        {
+            String[] songsArray = songs.Split(',');
+            System.Diagnostics.Debug.WriteLine(songsArray);
+
+            foreach (string song in songsArray)
+            {
+                if (song == "") { }
+                else
+                {
+                    MediaElement me = (MediaElement)FindName(song); // set media element to be played = name
+                    System.Diagnostics.Debug.WriteLine(song);
+                    me.Play();
+                    me.Tag = "Y"; // set tag to playing
+                }
+                    
+            }
+
+        }
+
+        // Sound buttons
+        private void SoundButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button curr = (Button)sender; // get the click event object (i.e. current sound)
+            string name = curr.Name.Substring(0, curr.Name.IndexOf("_")); // get the name of the click event before the _ (birds instead of birds_Click etc)
+
+            playSound(name);
 
         } // end sound buttons
 
@@ -113,38 +131,46 @@ namespace SleepSounds
 
             // Insert name of playlist at start of playing string
             String comboName = this.inputText.Text.ToString();
+            String addToPlaylist = "";
+
+            foreach (string song in songsList)
+            {
+                MediaElement me = (MediaElement)FindName(song); // set media element to be played = name
+                if (me.Tag.ToString() == "Y")
+                {
+                    addToPlaylist += "," + song;
+                }
+                else { }
+            }
             String thisPlaylist = comboName + "|" + addToPlaylist;
 
             // Write data to the file
             await FileIO.AppendTextAsync(playlists, thisPlaylist + Environment.NewLine); // Environment.NewLine sets pointer to new line for next entry
-
             System.Diagnostics.Debug.WriteLine(await FileIO.ReadTextAsync(playlists)); // testing
-           
+
+            //itemNew = new MenuFlyoutItem();
+            //itemNew.Name = comboName;           // MenuFlyoutItem name & displayed name are the same
+            //itemNew.Text = comboName;
+            //itemNew.Click += itemNew_Click;     // Create click method/event for new item
+            //xMenuFlyout.Items.Add(itemNew);     // add itemNew to MenuFlyout
+
+
             itemNew = new MenuFlyoutItem();
             itemNew.Name = comboName;           // MenuFlyoutItem name & displayed name are the same
             itemNew.Text = comboName;
             itemNew.Click += itemNew_Click;     // Create click method/event for new item
-            xMenuFlyout.Items.Add(itemNew);     // add itemNew to MenuFlyout
-
+            xMenuFlyout.Items.Add(itemNew);
         }
 
         private async void itemNew_Click(object sender, RoutedEventArgs e)
         {
-            MenuFlyoutItem curr = (MenuFlyoutItem)sender; // let current item equal to data sent by MenuFlyoutItem
-            
             // Open and read contents of file
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
             StorageFile playlists = await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists);
-
             var text = await FileIO.ReadLinesAsync(playlists); // read playlists file as lines
 
-            // Search through text, find line beginning with name,
-            // split line into songs string, for each song in songs add it to the songsArray
-            // search through songsArray, find matching ME for each element of the array & play it
-            // probably shorter way to do it but works for now
-            // stop button for all songs?
-            
-            String[] songsArray;
+            MenuFlyoutItem curr = (MenuFlyoutItem)sender; // let current item equal to data sent by MenuFlyoutItem
+
 
             foreach (var line in text)
             {
@@ -154,32 +180,16 @@ namespace SleepSounds
                     string songs = line.Split('|')[1]; // after the | = songs list
                     System.Diagnostics.Debug.WriteLine("name: " + name + ", " + curr.Text); // testing
 
-                    while (songs != null)
-                    {
-                        songsArray = songs.Split(','); // Split songs into songsArray, adapted from https://msdn.microsoft.com/en-us/library/ms228388.aspx
-                        foreach (var song in songsArray)   // loop through songsArray
-                        {
-                            System.Diagnostics.Debug.WriteLine(song); // testing
-                            if (song != "") 
-                            {
-                                // fixes bug with removing stopped songs from addToPlaylist string, e.g. string might be ",,rain,thunder,"
-                                // null elemement taken into account but not played, quickest workaround for now
-                                MediaElement me = (MediaElement)FindName(song.ToString());
-                                me.Play();
-                            }
-                            else { } // do nothing
-                            
-                        } // end foreach
+                    System.Diagnostics.Debug.WriteLine(songs);
+                    playPlaylist(songs);
 
-                    } // end while for searching line
+                }
 
-                } // end if right playlist
+                else { }
+            }
 
-                else { } // not the line/playlist you're looking for so do nothing
+        }// end item click
 
-            } // end foreach line in text
-
-        } // end item click
 
         private void flyout_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -187,6 +197,7 @@ namespace SleepSounds
             System.Diagnostics.Debug.WriteLine("flyout clicked"); // testing
         }
 
-    }// end mainpage
+    } // end mainpage
+
 } // end app
 
