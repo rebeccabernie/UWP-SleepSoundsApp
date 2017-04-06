@@ -76,7 +76,7 @@ namespace SleepSounds
                 me.Tag = "Y";
 
                 Button curr = (Button)FindName(me.Name + "_Btn");
-                curr.Content = "Playing " + curr.Content;
+                curr.Content = "♫ " + curr.Content; // found ♫ symbol on http://usefulshortcuts.com/alt-codes/bullet-alt-codes.php
             }
             else
             {
@@ -85,7 +85,7 @@ namespace SleepSounds
                 me.Stop();
                 me.Tag = "N";
                 Button curr = (Button)FindName(me.Name + "_Btn");
-                curr.Content = curr.Content.ToString().Replace("Playing ", "");
+                curr.Content = curr.Content.ToString().Replace("♫ ", "");
 
                 System.Diagnostics.Debug.WriteLine(me.Name + " stopped"); // testing
                 //System.Diagnostics.Debug.WriteLine("add: " + addToPlaylist); // testing
@@ -106,10 +106,18 @@ namespace SleepSounds
                     MediaElement me = (MediaElement)FindName(song); // set media element to be played = name
                     System.Diagnostics.Debug.WriteLine(song);
                     Button curr = (Button)FindName(me.Name + "_Btn");
-                    curr.Content = "Playing " + curr.Content;
-
-                    me.Play();
-                    me.Tag = "Y"; // set tag to playing
+                    if (me.Tag.ToString() == "Y") { 
+                        curr.Content = curr.Content.ToString().Replace("♫ ", "");
+                        me.Tag = "N";
+                        me.Stop();
+                    }
+                    else { 
+                        curr.Content = "♫ " + curr.Content;
+                        me.Tag = "Y";
+                        me.Play();
+                    }
+                    
+                    //me.Tag = "Y"; // set tag to playing
                 }
                     
             }
@@ -134,39 +142,49 @@ namespace SleepSounds
             // Create a folder and file if it doesn't exist
             StorageFolder storageFolder = ApplicationData.Current.LocalFolder;    // set folder to current working directory
             StorageFile playlists = await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists); // Create file playlists.txt or open if exists
-
+            var text = await FileIO.ReadLinesAsync(playlists);
             // Insert name of playlist at start of playing string
             String comboName = this.inputText.Text.ToString();
-            String addToPlaylist = "";
+            bool alreadyExists = false;
 
-            foreach (string song in songsList)
+            foreach (var line in text)
             {
-                MediaElement me = (MediaElement)FindName(song); // set media element to be played = name
-                if (me.Tag.ToString() == "Y")
+                if (line.StartsWith(comboName))
                 {
-                    addToPlaylist += "," + song;
+                    this.popup.IsOpen = true;
+                    alreadyExists = true;
+                    
                 }
                 else { }
             }
-            String thisPlaylist = comboName + "|" + addToPlaylist;
 
-            // Write data to the file
-            await FileIO.AppendTextAsync(playlists, thisPlaylist + Environment.NewLine); // Environment.NewLine sets pointer to new line for next entry
-            System.Diagnostics.Debug.WriteLine(await FileIO.ReadTextAsync(playlists)); // testing
+            if (alreadyExists != true)
+            {
+                String addToPlaylist = "";
 
-            //itemNew = new MenuFlyoutItem();
-            //itemNew.Name = comboName;           // MenuFlyoutItem name & displayed name are the same
-            //itemNew.Text = comboName;
-            //itemNew.Click += itemNew_Click;     // Create click method/event for new item
-            //xMenuFlyout.Items.Add(itemNew);     // add itemNew to MenuFlyout
+                foreach (string song in songsList)
+                {
+                    MediaElement me = (MediaElement)FindName(song); // set media element to be played = name
+                    if (me.Tag.ToString() == "Y")
+                    {
+                        addToPlaylist += "," + song;
+                    }
+                    else { }
+                }
+                String thisPlaylist = comboName + "|" + addToPlaylist;
 
+                // Write data to the file
+                await FileIO.AppendTextAsync(playlists, thisPlaylist + Environment.NewLine); // Environment.NewLine sets pointer to new line for next entry
+                System.Diagnostics.Debug.WriteLine(await FileIO.ReadTextAsync(playlists)); // testing
 
-            itemNew = new MenuFlyoutItem();
-            itemNew.Name = comboName;           // MenuFlyoutItem name & displayed name are the same
-            itemNew.Text = comboName;
-            itemNew.Click += itemNew_Click;     // Create click method/event for new item
-            xMenuFlyout.Items.Add(itemNew);
-        }
+                itemNew = new MenuFlyoutItem();
+                itemNew.Name = comboName;           // MenuFlyoutItem name & displayed name are the same
+                itemNew.Text = comboName;
+                itemNew.Click += itemNew_Click;     // Create click method/event for new item
+                xMenuFlyout.Items.Add(itemNew);     // add itemNew to MenuFlyout
+            }
+           
+        }// end combo
 
         private async void itemNew_Click(object sender, RoutedEventArgs e)
         {
@@ -176,7 +194,6 @@ namespace SleepSounds
             var text = await FileIO.ReadLinesAsync(playlists); // read playlists file as lines
 
             MenuFlyoutItem curr = (MenuFlyoutItem)sender; // let current item equal to data sent by MenuFlyoutItem
-
 
             foreach (var line in text)
             {
@@ -190,12 +207,9 @@ namespace SleepSounds
                     playPlaylist(songs);
 
                 }
-
                 else { }
             }
-
         }// end item click
-
 
         private void flyout_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -214,12 +228,19 @@ namespace SleepSounds
                 {
                     me.Stop();
                     me.Tag = "N";
+                    Button curr = (Button)FindName(me.Name + "_Btn");
+                    curr.Content = curr.Content.ToString().Replace("♫ ", "");
                 }
                 else{ }
 
 
             }
 
+        }
+
+        private void popup_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            this.popup.IsOpen = false;
         }
     } // end mainpage
 

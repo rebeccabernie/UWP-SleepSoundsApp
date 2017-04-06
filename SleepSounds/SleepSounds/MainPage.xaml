@@ -12,6 +12,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"-->
 
     <Grid>
+
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="Assets/portraitbackground.jpg" AlignmentY="Top" AlignmentX="Center"/>
         </Grid.Background>
@@ -137,6 +138,7 @@
                     </Button.Background>
 
                 </Button>
+
                 <!--#endregion-->
 
             </Grid>
@@ -163,6 +165,16 @@
                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,10,0,10" Click="stop_Click"/>
 
         </Grid>
+
+        <Popup x:Name="popup" VerticalAlignment="Bottom" Margin="10,0,10,80">
+            <Grid Background="White" Width="300">
+                <TextBlock Text="Whoops! This name already exists..." Foreground="SteelBlue"
+                           VerticalAlignment="Center" HorizontalAlignment="Left"
+                           Margin="5,2,5,2"/>
+                <Button Content="Ok" x:Name="popup_Btn" Click="popup_Btn_Click" HorizontalAlignment="Right"/>
+            </Grid>
+        </Popup>
+        
         <!--#endregion-->
             
             <!--#region Sound Files - can't be inside <Button> tags -->
