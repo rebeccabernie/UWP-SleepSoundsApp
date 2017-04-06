@@ -197,6 +197,24 @@ namespace SleepSounds
             System.Diagnostics.Debug.WriteLine("flyout clicked"); // testing
         }
 
+        private void stop_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in songsList)
+            {
+                MediaElement me = (MediaElement)FindName(item); // set media element to be played = name
+
+                // If / Else for stop/start on buttons
+                if (me.Tag.ToString() == "Y")
+                {
+                    me.Stop();
+                    me.Tag = "N";
+                }
+                else{ }
+
+
+            }
+
+        }
     } // end mainpage
 
 } // end app
