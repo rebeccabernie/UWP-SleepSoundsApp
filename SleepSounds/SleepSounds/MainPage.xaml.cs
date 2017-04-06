@@ -74,8 +74,9 @@ namespace SleepSounds
                 me.Play();
                 System.Diagnostics.Debug.WriteLine("Playing: " + me.Name); // testing
                 me.Tag = "Y";
-                //addToPlaylist += (me.Name + ",");
-                //System.Diagnostics.Debug.WriteLine("add: " + addToPlaylist);
+
+                Button curr = (Button)FindName(me.Name + "_Btn");
+                curr.Content = "Playing " + curr.Content;
             }
             else
             {
@@ -83,9 +84,11 @@ namespace SleepSounds
                 //addToPlaylist = addToPlaylist.Replace(me.Name, null); // replace current element with an empty string
                 me.Stop();
                 me.Tag = "N";
+                Button curr = (Button)FindName(me.Name + "_Btn");
+                curr.Content = curr.Content.ToString().Replace("Playing ", "");
+
                 System.Diagnostics.Debug.WriteLine(me.Name + " stopped"); // testing
                 //System.Diagnostics.Debug.WriteLine("add: " + addToPlaylist); // testing
-
             }
 
         }
@@ -102,6 +105,9 @@ namespace SleepSounds
                 {
                     MediaElement me = (MediaElement)FindName(song); // set media element to be played = name
                     System.Diagnostics.Debug.WriteLine(song);
+                    Button curr = (Button)FindName(me.Name + "_Btn");
+                    curr.Content = "Playing " + curr.Content;
+
                     me.Play();
                     me.Tag = "Y"; // set tag to playing
                 }
