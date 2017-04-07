@@ -27,8 +27,8 @@
                     Name="flyout_btn" Click="flyout_btn_Click">
                 <Button.Flyout>
                     <MenuFlyout x:Name="xMenuFlyout">
-                        <MenuFlyoutItem x:Name="deletePlaylists" Text="Clear Playlists" Background="Crimson" Foreground="White" 
-                                        Margin="2,2,2,2" Click="deletePlaylists_Click" />
+                        <MenuFlyoutItem x:Name="openWarning" Text="Clear Playlists" Background="Crimson" Foreground="White" 
+                                        Margin="2,2,2,2" Click="openWarning_Click" />
                     </MenuFlyout>
                 </Button.Flyout>
             </Button>
@@ -183,6 +183,16 @@
                            VerticalAlignment="Center" HorizontalAlignment="Left"
                            Margin="5,2,5,2"/>
                 <Button Content="Ok" x:Name="giveName_Btn" Click="popup_Btn_Click" HorizontalAlignment="Right"/>
+            </Grid>
+        </Popup>
+
+        <Popup x:Name="sure" VerticalAlignment="Center" HorizontalAlignment="Center" Height="150" Width="200">
+            <Grid Background="LightSteelBlue" Height="150" Width="200" Padding="20">
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Text="Are you sure you want to delete your playlists?"/>
+                <Button Width="78" x:Name="delete" Click="deletePlaylists_Click" Content="Yes" Background="Crimson" 
+                        Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <Button Width="78" x:Name="cancel" Click="popup_Btn_Click" Content="Cancel" Background="CornflowerBlue" 
+                        Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
             </Grid>
         </Popup>
 

@@ -167,78 +167,52 @@ namespace SleepSounds
                 error = true;
             }
 
-            foreach (var line in text)
-            {
+            else { 
+                foreach (var line in text)
+                {
                 
-                if (line.StartsWith(comboName))
-                {
-                    this.popup.IsOpen = true;
-                    error = true;
-                    
-                }
-                else { }
-            }
-
-            if (error != true)
-            {
-                String addToPlaylist = "";
-
-                foreach (string song in songsList)
-                {
-                    MediaElement me = (MediaElement)FindName(song); // set media element to be played = name
-                    if (me.Tag.ToString() == "Y")
+                    if (line.StartsWith(comboName))
                     {
-                        addToPlaylist += "," + song;
+                        this.popup.IsOpen = true;
+                        error = true;
+                    
                     }
                     else { }
                 }
-                String thisPlaylist = comboName + "|" + addToPlaylist;
 
-                // Write data to the file
-                await FileIO.AppendTextAsync(playlists, thisPlaylist + Environment.NewLine); // Environment.NewLine sets pointer to new line for next entry
-                System.Diagnostics.Debug.WriteLine(await FileIO.ReadTextAsync(playlists)); // testing
+                if (error != true)
+                {
+                    String addToPlaylist = "";
 
-                itemNew = new MenuFlyoutItem();
-                itemNew.Name = comboName;           // MenuFlyoutItem name & displayed name are the same
-                itemNew.Text = comboName;
-                //itemNew.Click += itemNew_Click;     // Create click method/event for new item
-                //playPL = new MenuFlyoutItem();
-                //playPL.Click += itemNew_Click;
-                //deletePlaylist = new MenuFlyoutItem();
-                //deletePlaylist.Click += delete_Click;
-                
+                    foreach (string song in songsList)
+                    {
+                        MediaElement me = (MediaElement)FindName(song); // set media element to be played = name
+                        if (me.Tag.ToString() == "Y")
+                        {
+                            addToPlaylist += "," + song;
+                        }
+                        else { }
+                    }
 
-                xMenuFlyout.Items.Add(itemNew);     // add itemNew to MenuFlyout
-            }
+                    String thisPlaylist = comboName + "|" + addToPlaylist;
+
+                    // Write data to the file
+                    await FileIO.AppendTextAsync(playlists, thisPlaylist + Environment.NewLine); // Environment.NewLine sets pointer to new line for next entry
+                    System.Diagnostics.Debug.WriteLine(await FileIO.ReadTextAsync(playlists)); // testing
+
+                    itemNew = new MenuFlyoutItem();
+                    itemNew.Name = comboName;           // MenuFlyoutItem name & displayed name are the same
+                    itemNew.Text = comboName;
+                    itemNew.Click += itemNew_Click;     // Create click method/event for new item
+         
+                    xMenuFlyout.Items.Add(itemNew);     // add itemNew to MenuFlyout
+                    this.inputText.Text = "";
+                } // end no error if
+
+            }   // end else input not null
            
         }// end combo
-
-        private async void delete_Click(object sender, RoutedEventArgs e)
-        {
-            //throw new NotImplementedException();
-            MenuFlyoutItem mi = (MenuFlyoutItem)sender;
-            string name = mi.Name;
-            xMenuFlyout.Items.Remove(mi);
-
-            // Create a folder and file if it doesn't exist
-            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;    // set folder to current working directory
-            StorageFile playlists = await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists); // Create file playlists.txt or open if exists
-            var text = await FileIO.ReadLinesAsync(playlists);
-
-            await FileIO.WriteTextAsync(playlists, ""); // clear contents of file
-            System.Diagnostics.Debug.WriteLine("Empty: " + playlists);
-
-            foreach (var line in text)
-            {
-                if (!line.StartsWith(name)) // if line doesn't start with item for deletion, add to new file
-                {
-                    await FileIO.WriteTextAsync(playlists, line + Environment.NewLine); // Environment.NewLine sets pointer to new line for next entry
-                }
-                else { } // is the file for deletion so don't add to new file
-            }
-
-
-        }
+        
 
         private async void itemNew_Click(object sender, RoutedEventArgs e)
         {
@@ -295,6 +269,7 @@ namespace SleepSounds
         {
             this.popup.IsOpen = false;
             this.giveName.IsOpen = false;
+            this.sure.IsOpen = false;
         }
 
         private async void deletePlaylists_Click(object sender, RoutedEventArgs e)
@@ -315,6 +290,10 @@ namespace SleepSounds
             await FileIO.WriteTextAsync(playlists, "");
         }
 
+        private void openWarning_Click(object sender, RoutedEventArgs e)
+        {
+            sure.IsOpen = true;
+        }
     } // end mainpage
 
 } // end app
