@@ -35,6 +35,8 @@
         </Grid>
         <!--#endregion-->
 
+        <!--#region Sound buttons -->
+
         <ScrollViewer Margin="0,40,0,0">
             <Grid Margin="0,0,0,0" Height="750">
 
@@ -51,7 +53,6 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <!--#region Sound buttons -->
                 <!-- Quicksand_Light is in Quicksand font family -->
 
                 <Button Grid.Row="0" x:Name="rain_Btn" Content="Rain" Foreground="White"
@@ -141,11 +142,11 @@
 
                 </Button>
 
-                <!--#endregion-->
 
             </Grid>
 
         </ScrollViewer>
+        <!--#endregion-->
 
         <!--#region Create a combo-->
         <Grid VerticalAlignment="Bottom" Background="Black">
@@ -167,6 +168,8 @@
                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,10,0,10" Click="stop_Click"/>
 
         </Grid>
+        <!--#endregion-->
+
 
         <Popup x:Name="popup" VerticalAlignment="Bottom" Margin="10,0,10,80">
             <Grid Background="White" Width="300">
@@ -204,19 +207,18 @@
             </Grid>
         </Popup>
         
-        <!--#endregion-->
             
-            <!--#region Sound Files - can't be inside <Button> tags -->
-            <MediaElement Tag="N" x:Name="rain" AutoPlay="False" Source="Assets/Sounds/rain.mp3" IsLooping="True"/>
-            <MediaElement Tag="N" x:Name="waves" AutoPlay="False" Source="Assets/Sounds/waves.mp3" IsLooping="True"/>
-            <MediaElement Tag="N" x:Name="thunder" AutoPlay="False" Source="Assets/Sounds/thunder.mp3" IsLooping="True"/>
-            <MediaElement Tag="N" x:Name="whitenoise" AutoPlay="False" Source="Assets/Sounds/whitenoise.mp3" IsLooping="True"/>
-            <MediaElement Tag="N" x:Name="fire" AutoPlay="False" Source="Assets/Sounds/fire.mp3" IsLooping="True"/>
-            <MediaElement Tag="N" x:Name="cat" AutoPlay="False" Source="Assets/Sounds/cat.wav" IsLooping="True"/>
-            <MediaElement Tag="N" x:Name="forrain" AutoPlay="False" Source="Assets/Sounds/forrain.mp3" IsLooping="True"/>
-            <MediaElement Tag="N" x:Name="city" AutoPlay="False" Source="Assets/Sounds/city.mp3" IsLooping="True"/>
-            <MediaElement Tag="N" x:Name="birds" AutoPlay="False" Source="Assets/Sounds/birds.mp3" IsLooping="True"/>
-            <!--#endregion-->
+        <!--#region Sound Files - can't be inside <Button> tags -->
+        <MediaElement Tag="N" x:Name="rain" AutoPlay="False" Source="Assets/Sounds/rain.mp3" IsLooping="True"/>
+        <MediaElement Tag="N" x:Name="waves" AutoPlay="False" Source="Assets/Sounds/waves.mp3" IsLooping="True"/>
+        <MediaElement Tag="N" x:Name="thunder" AutoPlay="False" Source="Assets/Sounds/thunder.mp3" IsLooping="True"/>
+        <MediaElement Tag="N" x:Name="whitenoise" AutoPlay="False" Source="Assets/Sounds/whitenoise.mp3" IsLooping="True" Volume="0.3"/> <!-- Default volume is 0.5, little bit too loud at this -->
+        <MediaElement Tag="N" x:Name="fire" AutoPlay="False" Source="Assets/Sounds/fire.mp3" IsLooping="True"/>
+        <MediaElement Tag="N" x:Name="cat" AutoPlay="False" Source="Assets/Sounds/cat.mp3" IsLooping="True" Volume="0.4"/>
+        <MediaElement Tag="N" x:Name="forrain" AutoPlay="False" Source="Assets/Sounds/forrain.mp3" IsLooping="True"/>
+        <MediaElement Tag="N" x:Name="city" AutoPlay="False" Source="Assets/Sounds/city.mp3" IsLooping="True"/>
+        <MediaElement Tag="N" x:Name="birds" AutoPlay="False" Source="Assets/Sounds/birds.mp3" IsLooping="True"/>
+        <!--#endregion-->
 
     </Grid>
 </Page>

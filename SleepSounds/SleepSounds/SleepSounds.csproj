@@ -120,7 +120,7 @@
   <ItemGroup>
     <Content Include="Assets\BtnImgs\rain.jpg" />
     <Content Include="Assets\Sounds\birds.mp3" />
-    <Content Include="Assets\Sounds\cat.wav" />
+    <Content Include="Assets\Sounds\cat.mp3" />
     <Content Include="Assets\Sounds\city.mp3" />
     <Content Include="Assets\Sounds\fire.mp3" />
     <Content Include="Assets\Sounds\forrain.mp3" />
