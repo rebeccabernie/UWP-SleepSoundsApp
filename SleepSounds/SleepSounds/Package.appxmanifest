@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="31118rebeccabernie.SleepSounds" Publisher="CN=AAED2C64-561E-4AF4-8309-DF729FF46932" Version="1.1.0.0" />
+  <Identity Name="31118rebeccabernie.SleepSounds" Publisher="CN=AAED2C64-561E-4AF4-8309-DF729FF46932" Version="1.1.10.0" />
   <mp:PhoneIdentity PhoneProductId="cc1b0828-32c0-4a5a-882c-59c7edb4210a" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Sleep Sounds</DisplayName>
