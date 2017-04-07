@@ -24,9 +24,9 @@ namespace SleepSounds
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        MenuFlyoutSubItem itemNew;
-        MenuFlyoutItem delete;
-        MenuFlyoutItem play;
+        MenuFlyoutItem itemNew;
+        //MenuFlyoutItem delete;
+        //MenuFlyoutItem play;
 
 
         //String addToPlaylist; // keep track of what to add to playlist, initialise as null
@@ -42,6 +42,7 @@ namespace SleepSounds
         // Initialise/populate the playlist menu
         private async void initPlaylists()
         {
+            MenuFlyoutItem itemNew = new MenuFlyoutItem();
             // Read functions adapted from https://docs.microsoft.com/en-us/windows/uwp/files/quickstart-reading-and-writing-files
 
             // Location of folder
@@ -55,25 +56,23 @@ namespace SleepSounds
                 string name = "" + line.Split('|')[0]; // split each line at the |, set name to string at index 0 (before the |, i.e. the name)
 
                 // Populate MenuFlyout with item names from file
-                itemNew = new MenuFlyoutSubItem(); // create new item on flyout
+                itemNew = new MenuFlyoutItem(); // create new item on flyout // SubItem?
                 itemNew.Name = name;            // give it a name
                 itemNew.Text = name;            // actual content (what user sees)
-                //itemNew.Click += itemNew_Click; // create click event on item
+                itemNew.Click += itemNew_Click; // create click event on item
 
-                playPL = new MenuFlyoutItem();
-                playPL.Click += itemNew_Click;
-                deletePlaylist = new MenuFlyoutItem();
-                deletePlaylist.Click += delete_Click;
+                //itemNew.Add(playPL) = new MenuFlyoutItem();
+                //playPL.Click += itemNew_Click;
+                //deletePlaylist = new MenuFlyoutItem();
+                //deletePlaylist.Click += delete_Click;
 
 
                 if (!xMenuFlyout.Items.Contains(itemNew))
-                {
                     xMenuFlyout.Items.Add(itemNew);
-                    xMenuFlyout.Items.Add(playPL);
-                    xMenuFlyout.Items.Add(deletePlaylist);
 
-                }
-
+                    //xMenuFlyout.Items.Add(playPL);
+                    //xMenuFlyout.Items.Add(deletePlaylist);
+                 
                 else { } // do nothing
 
             }
@@ -116,7 +115,7 @@ namespace SleepSounds
 
             foreach (string song in songsArray)
             {
-                if (song == "") { }
+                if (song == "") { } // do nothing
                 else
                 {
                     MediaElement me = (MediaElement)FindName(song); // set media element to be played = name
@@ -133,7 +132,6 @@ namespace SleepSounds
                         me.Play();
                     }
                     
-                    //me.Tag = "Y"; // set tag to playing
                 }
                     
             }
@@ -161,20 +159,27 @@ namespace SleepSounds
             var text = await FileIO.ReadLinesAsync(playlists);
             // Insert name of playlist at start of playing string
             String comboName = this.inputText.Text.ToString();
-            bool alreadyExists = false;
+            bool error = false;
+
+            if (comboName == "")
+            {
+                this.giveName.IsOpen = true;
+                error = true;
+            }
 
             foreach (var line in text)
             {
+                
                 if (line.StartsWith(comboName))
                 {
                     this.popup.IsOpen = true;
-                    alreadyExists = true;
+                    error = true;
                     
                 }
                 else { }
             }
 
-            if (alreadyExists != true)
+            if (error != true)
             {
                 String addToPlaylist = "";
 
@@ -193,14 +198,14 @@ namespace SleepSounds
                 await FileIO.AppendTextAsync(playlists, thisPlaylist + Environment.NewLine); // Environment.NewLine sets pointer to new line for next entry
                 System.Diagnostics.Debug.WriteLine(await FileIO.ReadTextAsync(playlists)); // testing
 
-                itemNew = new MenuFlyoutSubItem();
+                itemNew = new MenuFlyoutItem();
                 itemNew.Name = comboName;           // MenuFlyoutItem name & displayed name are the same
                 itemNew.Text = comboName;
                 //itemNew.Click += itemNew_Click;     // Create click method/event for new item
-                playPL = new MenuFlyoutItem();
-                playPL.Click += itemNew_Click;
-                deletePlaylist = new MenuFlyoutItem();
-                deletePlaylist.Click += delete_Click;
+                //playPL = new MenuFlyoutItem();
+                //playPL.Click += itemNew_Click;
+                //deletePlaylist = new MenuFlyoutItem();
+                //deletePlaylist.Click += delete_Click;
                 
 
                 xMenuFlyout.Items.Add(itemNew);     // add itemNew to MenuFlyout
@@ -281,8 +286,7 @@ namespace SleepSounds
                     curr.Content = curr.Content.ToString().Replace("♫ ", "");
                 }
                 else{ }
-
-
+                
             }
 
         }
@@ -290,12 +294,27 @@ namespace SleepSounds
         private void popup_Btn_Click(object sender, RoutedEventArgs e)
         {
             this.popup.IsOpen = false;
+            this.giveName.IsOpen = false;
         }
 
-        private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        private async void deletePlaylists_Click(object sender, RoutedEventArgs e)
         {
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;
+            StorageFile playlists = await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists);
+            var text = await FileIO.ReadLinesAsync(playlists); // read playlists file as lines
 
+            foreach (var line in text)
+            {
+                string name = "" + line.Split('|')[0];
+
+                MenuFlyoutItem mf = (MenuFlyoutItem)FindName(name);
+                xMenuFlyout.Items.Remove(mf);
+                this.close.IsOpen = true;
+
+            }
+            await FileIO.WriteTextAsync(playlists, "");
         }
+
     } // end mainpage
 
 } // end app

@@ -27,10 +27,8 @@
                     Name="flyout_btn" Click="flyout_btn_Click">
                 <Button.Flyout>
                     <MenuFlyout x:Name="xMenuFlyout">
-                        <MenuFlyoutSubItem Text="">
-                            <MenuFlyoutItem x:Name="playPL" Text="Play" Click="itemNew_Click"/>
-                            <MenuFlyoutItem x:Name="deletePlaylist" Text="Delete" Click="delete_Click"/>
-                        </MenuFlyoutSubItem>
+                        <MenuFlyoutItem x:Name="deletePlaylists" Text="Clear Playlists" Background="Crimson" Foreground="White" 
+                                        Margin="2,2,2,2" Click="deletePlaylists_Click" />
                     </MenuFlyout>
                 </Button.Flyout>
             </Button>
@@ -176,6 +174,23 @@
                            VerticalAlignment="Center" HorizontalAlignment="Left"
                            Margin="5,2,5,2"/>
                 <Button Content="Ok" x:Name="popup_Btn" Click="popup_Btn_Click" HorizontalAlignment="Right"/>
+            </Grid>
+        </Popup>
+
+        <Popup x:Name="giveName" VerticalAlignment="Bottom" Margin="10,0,10,80">
+            <Grid Background="White" Width="300">
+                <TextBlock Text="Enter a name to save this playlist?" Foreground="SteelBlue"
+                           VerticalAlignment="Center" HorizontalAlignment="Left"
+                           Margin="5,2,5,2"/>
+                <Button Content="Ok" x:Name="giveName_Btn" Click="popup_Btn_Click" HorizontalAlignment="Right"/>
+            </Grid>
+        </Popup>
+
+        <Popup x:Name="close" VerticalAlignment="Center" HorizontalAlignment="Center" Height="300" Width="200">
+            <Grid Background="LightSteelBlue" Height="300" Width="200" Padding="20">
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Text="Your playlists have been deleted."/>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" TextAlignment="Center" Text="Please close and reopen SleepSounds to see any changes."/>
+                <TextBlock TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Center" Text="Thank you!"/>
             </Grid>
         </Popup>
         
