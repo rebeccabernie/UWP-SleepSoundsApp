@@ -27,6 +27,10 @@
                     Name="flyout_btn" Click="flyout_btn_Click">
                 <Button.Flyout>
                     <MenuFlyout x:Name="xMenuFlyout">
+                        <MenuFlyoutSubItem Text="">
+                            <MenuFlyoutItem x:Name="playPL" Text="Play" Click="itemNew_Click"/>
+                            <MenuFlyoutItem x:Name="deletePlaylist" Text="Delete" Click="delete_Click"/>
+                        </MenuFlyoutSubItem>
                     </MenuFlyout>
                 </Button.Flyout>
             </Button>

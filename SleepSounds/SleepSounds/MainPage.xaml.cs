@@ -24,7 +24,11 @@ namespace SleepSounds
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        MenuFlyoutItem itemNew;
+        MenuFlyoutSubItem itemNew;
+        MenuFlyoutItem delete;
+        MenuFlyoutItem play;
+
+
         //String addToPlaylist; // keep track of what to add to playlist, initialise as null
         String[] songsList = { "birds", "cat", "city", "fire", "forrain", "rain", "thunder", "waves", "whitenoise" };
 
@@ -51,13 +55,25 @@ namespace SleepSounds
                 string name = "" + line.Split('|')[0]; // split each line at the |, set name to string at index 0 (before the |, i.e. the name)
 
                 // Populate MenuFlyout with item names from file
-                itemNew = new MenuFlyoutItem(); // create new item on flyout
+                itemNew = new MenuFlyoutSubItem(); // create new item on flyout
                 itemNew.Name = name;            // give it a name
                 itemNew.Text = name;            // actual content (what user sees)
-                itemNew.Click += itemNew_Click; // create click event on item
+                //itemNew.Click += itemNew_Click; // create click event on item
+
+                playPL = new MenuFlyoutItem();
+                playPL.Click += itemNew_Click;
+                deletePlaylist = new MenuFlyoutItem();
+                deletePlaylist.Click += delete_Click;
+
 
                 if (!xMenuFlyout.Items.Contains(itemNew))
+                {
                     xMenuFlyout.Items.Add(itemNew);
+                    xMenuFlyout.Items.Add(playPL);
+                    xMenuFlyout.Items.Add(deletePlaylist);
+
+                }
+
                 else { } // do nothing
 
             }
@@ -177,14 +193,47 @@ namespace SleepSounds
                 await FileIO.AppendTextAsync(playlists, thisPlaylist + Environment.NewLine); // Environment.NewLine sets pointer to new line for next entry
                 System.Diagnostics.Debug.WriteLine(await FileIO.ReadTextAsync(playlists)); // testing
 
-                itemNew = new MenuFlyoutItem();
+                itemNew = new MenuFlyoutSubItem();
                 itemNew.Name = comboName;           // MenuFlyoutItem name & displayed name are the same
                 itemNew.Text = comboName;
-                itemNew.Click += itemNew_Click;     // Create click method/event for new item
+                //itemNew.Click += itemNew_Click;     // Create click method/event for new item
+                playPL = new MenuFlyoutItem();
+                playPL.Click += itemNew_Click;
+                deletePlaylist = new MenuFlyoutItem();
+                deletePlaylist.Click += delete_Click;
+                
+
                 xMenuFlyout.Items.Add(itemNew);     // add itemNew to MenuFlyout
             }
            
         }// end combo
+
+        private async void delete_Click(object sender, RoutedEventArgs e)
+        {
+            //throw new NotImplementedException();
+            MenuFlyoutItem mi = (MenuFlyoutItem)sender;
+            string name = mi.Name;
+            xMenuFlyout.Items.Remove(mi);
+
+            // Create a folder and file if it doesn't exist
+            StorageFolder storageFolder = ApplicationData.Current.LocalFolder;    // set folder to current working directory
+            StorageFile playlists = await storageFolder.CreateFileAsync("playlists.txt", CreationCollisionOption.OpenIfExists); // Create file playlists.txt or open if exists
+            var text = await FileIO.ReadLinesAsync(playlists);
+
+            await FileIO.WriteTextAsync(playlists, ""); // clear contents of file
+            System.Diagnostics.Debug.WriteLine("Empty: " + playlists);
+
+            foreach (var line in text)
+            {
+                if (!line.StartsWith(name)) // if line doesn't start with item for deletion, add to new file
+                {
+                    await FileIO.WriteTextAsync(playlists, line + Environment.NewLine); // Environment.NewLine sets pointer to new line for next entry
+                }
+                else { } // is the file for deletion so don't add to new file
+            }
+
+
+        }
 
         private async void itemNew_Click(object sender, RoutedEventArgs e)
         {
@@ -241,6 +290,11 @@ namespace SleepSounds
         private void popup_Btn_Click(object sender, RoutedEventArgs e)
         {
             this.popup.IsOpen = false;
+        }
+
+        private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     } // end mainpage
 
