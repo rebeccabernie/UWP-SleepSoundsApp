@@ -2,6 +2,8 @@
 This is a project for 3rd Year Software Development module Mobile Apps Development 2. It is a single page Universal Windows App that provides the user with ambient sounds to help them relax or sleep.  
 The user can play one or many sounds at a time, and create playlists.  
 
+The app can be downloaded for free onto any compatible Windows device from the [Microsoft App Store](https://www.microsoft.com/en-ie/store/p/sleep-sounds/9p3grvnp723g)
+
 
 ## User Guide  
 
